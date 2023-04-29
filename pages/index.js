@@ -6,12 +6,15 @@ import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
-  let subdomain;
+  let [subDomain, setSubDomain] = useState('');
   const [host, setHost] = useState('')
   useEffect(()=> {
     setHost(window.location.host)
+    const arr = host.split('.').slice(0, host.includes('localhost') ? -1 : -2)
+    setSubDomain(arr)
   })
   
+
   
   
   return (
@@ -25,6 +28,7 @@ export default function Home() {
       <main className={styles.main}>
        <div>
         <h1>Main Domain - {host}</h1>
+        <h1>Sub Domain - {subDomain}</h1>
        </div>
       </main>
 
