@@ -4,16 +4,16 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
+import { getSubDomain } from "./helper";
 
 export default function Home() {
   let [subDomain, setSubDomain] = useState(null);
   const [host, setHost] = useState("");
   useEffect(() => {
     setHost(window.location.host);
-    const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : -2);
+    setSubDomain(getSubDomain(host))
 
-    setSubDomain(arr);
-  }, []);
+  }, [host]);
 
   return (
     <div className={styles.container}>
